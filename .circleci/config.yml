@@ -23,7 +23,8 @@ jobs:
               echo "=================="
             done
           background: true
-      - run: sleep 10; echo "foo" 1>&2
+      - run: sleep 10
+      - run: echo "foo" 1>&2
       - run: sleep 10
       - run: sleep 10
       - run: sleep 10
