@@ -22,6 +22,17 @@ jobs:
             rm -rf $CIRCLE_WORKING_DIRECTORY
             mkdir $CIRCLE_WORKING_DIRECTORY
       - run: mkdir -p /tmp/depcache; echo 'my cached file' > /tmp/depcache/cached.txt
+      - save_cache:
+          key: depcache-v1-{{ .BuildNum }}
+          paths:
+            - /tmp/depcache
+      - run: rm -r /tmp/depcache
+      - restore_cache:
+          key: depcache-v1-{{ .BuildNum }}
+      - run:
+          name: Verify cache
+          command: |
+            [ "$(cat /tmp/depcache/cached.txt)" == 'my cached file' ]
 
       # upload artifacts!
       - run:
@@ -42,7 +53,7 @@ jobs:
           command: |
             mkdir -p test-results
             mkdir -p test-results2
-            cat <<XML > test-results/junit.xml
+            cat \<<XML > test-results/junit.xml
             <testsuite tests="3">
               <testcase classname="foo1" name="ASuccessfulTest"/>
               <testcase classname="foo2" name="AnotherSuccessfulTest"/>
@@ -58,6 +69,14 @@ jobs:
           path: test-results2
       - store_artifacts:
           path: test-results
+
+      # Persist a workspace
+      - run: |
+          echo "workspace" > workspace.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - workspace.txt
 
   long-build:
     docker:
