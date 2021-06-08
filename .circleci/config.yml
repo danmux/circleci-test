@@ -4,7 +4,9 @@ version: 2.1
 workflows:
   playtime:
     jobs:
-      - short-build
+      - short-build:
+          requires:
+            - runner-test
       - runner-test
 
 aliases:
@@ -110,5 +112,12 @@ jobs:
             done
           background: true
       - run: sleep 10
+      - attach_workspace:
+          at: ~/attached-workspace
+      - run:
+          name: Verify Workspace Roundtrip
+          command: |
+            [ "$(cat ~/attached-workspace/workspace.txt)" == 'workspace' ]
+
       - run: echo "foo" 1>&2
       - run: sleep 10
