@@ -345,6 +345,49 @@ jobs:
           paths:
             - workspace-b2.txt
 
+  workspace-c-runner:
+    machine: true
+    resource_class: danmux/runner-mbp
+    working_directory: ~/realitycheck
+    steps:
+      # verify we see a and b
+      - run:
+          name: Clean any existing
+          command: |
+            rm -rf ~/attached-workspace
+      - attach_workspace:
+          at: ~/attached-workspace
+      - run:
+          name: Verify a
+          command: |
+            [ "$(cat ~/attached-workspace/workspace-a.txt)" == 'workspace-a' ]
+      - run:
+          name: Verify a2
+          command: |
+            [ "$(cat ~/attached-workspace/workspace-a2.txt)" == 'workspace-a2' ]
+      - run:
+          name: Verify b
+          command: |
+            [ "$(cat ~/attached-workspace/workspace-b.txt)" == 'workspace-b' ]
+      - run:
+          name: Verify b2
+          command: |
+            [ "$(cat ~/attached-workspace/workspace-b2.txt)" == 'workspace-b2' ]
+      # persist c
+      - run: |
+          echo "workspace-c" > workspace-c.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - workspace-c.txt
+      # override a file from ws b file 
+      - run: |
+          echo "override-b2" > workspace-b2.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - workspace-b2.txt
+
   workspace-d:
     docker:
       - image: alpine
@@ -510,6 +553,10 @@ workflows:
       - workspace-a
       - workspace-b
       - workspace-c:
+          requires:
+            - workspace-a
+            - workspace-b
+      - workspace-c-runner:
           requires:
             - workspace-a
             - workspace-b
