@@ -100,7 +100,7 @@ jobs:
 
   runner:
     machine: true
-    resource_class: danmux/dans-mac
+    resource_class: danmux/runner-mbp
     steps:
       - run: echo "Hi I'm a Runner job on a macos MBP"
       - run:
@@ -285,7 +285,7 @@ jobs:
 
   workspace-b:
     machine: true
-    resource_class: danmux/dans-mac
+    resource_class: danmux/runner-mbp
     parallelism: 2
     working_directory: ~/realitycheck
     steps:
@@ -420,7 +420,7 @@ jobs:
   # todo matrix-ify?
   workspace-e-runner:
     machine: true
-    resource_class: danmux/dans-mac
+    resource_class: danmux/runner-mbp
     working_directory: ~/realitycheck
     steps:
       # verify we see a and b, c, c's override of b and d
@@ -463,7 +463,7 @@ jobs:
   # todo matrix-ify?
   workspace-r-runner:
     machine: true
-    resource_class: danmux/dans-mac
+    resource_class: danmux/runner-mbp
     working_directory: ~/realitycheck
     steps:
       - run:
