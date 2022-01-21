@@ -1,3 +1,3 @@
 # circleci-test
 
-rerun
+rerun 1
