@@ -8,8 +8,8 @@ workflows:
 jobs:
   test:
     machine:
-      image: ubuntu-2004:202011-01
-    resource_class: arm-large
+      image: ubuntu-1404
+    resource_class: small
     steps:
       - checkout:
           path: project
