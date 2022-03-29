@@ -19,6 +19,8 @@ jobs:
       - run: touch sample/zero_file
       - run: ls sample
       - run: env
+      - run: mkdir ../sample
+      - run: fallocate -l 5M ../sample/small-file.img
       - store_artifacts:
-          path: sample
+          path: ../sample
       - run: sleep 120    
