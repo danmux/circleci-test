@@ -2,8 +2,8 @@ version: 2
 
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202111-01
+    docker:
+      - image: circleci/python:3.7
     resource_class: large
     environment:
       AWS_DEFAULT_REGION: "eu-west-1"
@@ -19,6 +19,10 @@ jobs:
       - run: touch sample/zero_file
       - run: ls sample
       - run: env
+      - run: mkdir 😀​😁​😂​😃​😄​😅​😆​😇​😈​
+      - run: fallocate -l 5M 😀​😁​😂​😃​😄​😅​😆​😇​😈​/small-file.img
+      - store_artifacts:
+          path: 😀​😁​😂​😃​😄​😅​😆​😇​😈​
       - run: mkdir ../oneup
       - run: fallocate -l 5M ../oneup/small-file.img
       - store_artifacts:
