@@ -16,6 +16,7 @@ jobs:
       - run: fallocate -l 112M sample/big-file.img
       - run: touch sample/zero_file
       - run: ls sample
+      - run: env
       - store_artifacts:
           path: sample
       - run: sleep 120    
