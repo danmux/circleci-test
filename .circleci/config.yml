@@ -14,6 +14,7 @@ jobs:
     steps:
       - checkout
       - run: fallocate -l 5M sample/small-file.img
+      - run: fallocate -l 5M sample/#small-file.img
       - run: fallocate -l 112M sample/big-file.img
       - run: touch sample/zero_file
       - run: ls sample
