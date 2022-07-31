@@ -7,9 +7,9 @@ workflows:
 
 jobs:
   test:
-    machine:
-      image: ubuntu-2004:202011-01
-    resource_class: arm-large
+    docker:
+      - image: alpine
+    resource_class: medium
     steps:
       - checkout:
           path: project
