@@ -3,13 +3,14 @@ version: 2.1
 workflows:
   main:
     jobs:
-      - test
+      - build
 
 jobs:
-  test:
+  build:
     docker:
-      - image: alpine
-    resource_class: medium
+      - image: alpine:latest
+    resource_class: small
     steps:
-      - checkout:
-          path: project
+      - run: env
+      - setup_remote_docker
+      - run: sleep 600
