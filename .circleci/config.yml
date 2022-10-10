@@ -175,6 +175,17 @@ jobs:
       - run:
           <<: *basic_docker_build
       - run: docker version
+      
+  macos:
+    macos:
+      xcode: 12.5.1 # indicate your selected version of Xcode
+    resource_class: large  
+    steps:
+      - run: which docker
+      - run: docker -v
+      - run:
+          <<: *basic_docker_build
+      - run: docker version    
 
   # feature jobs
   contexts:
