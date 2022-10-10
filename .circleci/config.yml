@@ -100,7 +100,7 @@ jobs:
 
   runner:
     machine: true
-    resource_class: danmux/runner-mbp
+    resource_class: danmux/test
     steps:
       - run: echo "Hi I'm a Runner job on a macos MBP"
       - run:
