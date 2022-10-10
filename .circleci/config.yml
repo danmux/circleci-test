@@ -545,6 +545,7 @@ workflows:
       - docker_layer_caching
       - machine_dlc
       - runner
+      - macos
 
   # feature_jobs:
   #   jobs:
